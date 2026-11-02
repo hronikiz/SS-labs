@@ -1,0 +1,82 @@
+{
+  "info": {
+    "name": "Lab2 Books API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [{ "key": "baseUrl", "value": "http://localhost:3000" }],
+  "item": [
+    { "name": "01 GET all books (200)", "request": { "method": "GET", "url": "{{baseUrl}}/api/books" } },
+    { "name": "02 GET book by id (200)", "request": { "method": "GET", "url": "{{baseUrl}}/api/books/2" } },
+    { "name": "03 GET book not found (404)", "request": { "method": "GET", "url": "{{baseUrl}}/api/books/99" } },
+    { "name": "04 Filter genre (200)", "request": { "method": "GET", "url": "{{baseUrl}}/api/books?genre=fantasy" } },
+    { "name": "05 Filter genre + year (200)", "request": { "method": "GET", "url": "{{baseUrl}}/api/books?genre=fantasy&year=1937" } },
+    { "name": "06 Search title (200)", "request": { "method": "GET", "url": "{{baseUrl}}/api/books/search?title=NODE" } },
+    { "name": "07 Statistics (200)", "request": { "method": "GET", "url": "{{baseUrl}}/api/statistics" } },
+    { "name": "08 GET all authors (200)", "request": { "method": "GET", "url": "{{baseUrl}}/api/authors" } },
+    { "name": "09 GET author by id (200)", "request": { "method": "GET", "url": "{{baseUrl}}/api/authors/1" } },
+    { "name": "10 GET books of author (200)", "request": { "method": "GET", "url": "{{baseUrl}}/api/authors/1/books" } },
+    {
+      "name": "11 POST create book (201)",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/books",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Clean Code\",\n  \"authorId\": 3,\n  \"genre\": \"programming\",\n  \"year\": 2008\n}",
+          "options": { "raw": { "language": "json" } }
+        }
+      }
+    },
+    {
+      "name": "12 POST missing field (400)",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/books",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"No Genre\",\n  \"authorId\": 1,\n  \"year\": 2000\n}",
+          "options": { "raw": { "language": "json" } }
+        }
+      }
+    },
+    {
+      "name": "13 POST unknown author (400)",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/books",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Ghost\",\n  \"authorId\": 99,\n  \"genre\": \"fantasy\",\n  \"year\": 2020\n}",
+          "options": { "raw": { "language": "json" } }
+        }
+      }
+    },
+    {
+      "name": "14 PATCH update book 7 (200)",
+      "request": {
+        "method": "PATCH",
+        "url": "{{baseUrl}}/api/books/7",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"genre\": \"software engineering\"\n}",
+          "options": { "raw": { "language": "json" } }
+        }
+      }
+    },
+    {
+      "name": "15 PATCH book not found (404)",
+      "request": {
+        "method": "PATCH",
+        "url": "{{baseUrl}}/api/books/99",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"year\": 2000\n}",
+          "options": { "raw": { "language": "json" } }
+        }
+      }
+    },
+    { "name": "16 DELETE book 7 (200)", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/books/7" } },
+    { "name": "17 DELETE again (404)", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/books/7" } },
+    { "name": "18 Unknown route (404)", "request": { "method": "GET", "url": "{{baseUrl}}/api/unknown" } }
+  ]
+}
