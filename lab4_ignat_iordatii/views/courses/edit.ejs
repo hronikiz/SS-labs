@@ -1,0 +1,45 @@
+<%- include('../partials/header') %>
+
+<h1>Редактирование курса</h1>
+
+<% if (errors.length > 0) { %>
+    <div class="error-box">
+        <p>Исправьте ошибки:</p>
+        <ul>
+            <% errors.forEach((error) => { %>
+                <li><%= error %></li>
+            <% }) %>
+        </ul>
+    </div>
+<% } %>
+
+<form class="course-form" action="/courses/<%= course.id %>/edit" method="POST" novalidate>
+    <label for="title">Название</label>
+    <input type="text" id="title" name="title" value="<%= course.title %>">
+
+    <label for="credits">Количество кредитов</label>
+    <input type="number" id="credits" name="credits" value="<%= course.credits %>">
+
+    <label for="semester">Семестр</label>
+    <input type="number" id="semester" name="semester" value="<%= course.semester %>">
+
+    <label for="description">Описание</label>
+    <textarea id="description" name="description" rows="5"><%= course.description %></textarea>
+
+    <label for="teacherId">Преподаватель</label>
+    <select id="teacherId" name="teacherId">
+        <option value="">-- Выберите преподавателя --</option>
+        <% teachers.forEach((teacher) => { %>
+            <option value="<%= teacher.id %>" <%= String(teacher.id) === String(course.teacherId) ? 'selected' : '' %>>
+                <%= teacher.name %> (<%= teacher.department %>)
+            </option>
+        <% }) %>
+    </select>
+
+    <div class="actions">
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+        <a class="btn btn-secondary" href="/courses/<%= course.id %>">Отмена</a>
+    </div>
+</form>
+
+<%- include('../partials/footer') %>

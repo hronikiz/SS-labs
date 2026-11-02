@@ -1,0 +1,35 @@
+<%- include('../partials/header') %>
+
+<h1>Редактирование преподавателя</h1>
+
+<% if (errors.length > 0) { %>
+    <div class="error-box">
+        <p>Исправьте ошибки:</p>
+        <ul>
+            <% errors.forEach((error) => { %>
+                <li><%= error %></li>
+            <% }) %>
+        </ul>
+    </div>
+<% } %>
+
+<form class="course-form" action="/teachers/<%= teacher.id %>/edit" method="POST" novalidate>
+    <label for="name">Имя</label>
+    <input type="text" id="name" name="name" value="<%= teacher.name %>">
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" value="<%= teacher.email %>">
+
+    <label for="department">Кафедра</label>
+    <input type="text" id="department" name="department" value="<%= teacher.department %>">
+
+    <label for="academicDegree">Учёная степень</label>
+    <input type="text" id="academicDegree" name="academicDegree" value="<%= teacher.academicDegree %>">
+
+    <div class="actions">
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+        <a class="btn btn-secondary" href="/teachers/<%= teacher.id %>">Отмена</a>
+    </div>
+</form>
+
+<%- include('../partials/footer') %>

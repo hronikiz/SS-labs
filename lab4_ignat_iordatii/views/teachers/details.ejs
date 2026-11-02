@@ -1,0 +1,68 @@
+<%- include('../partials/header') %>
+
+<% if (error) { %>
+    <div class="error-box">
+        <p><%= error %></p>
+    </div>
+<% } %>
+
+<article class="course-card">
+    <h1><%= teacher.name %></h1>
+
+    <dl class="course-info">
+        <dt>Email</dt>
+        <dd><%= teacher.email %></dd>
+
+        <dt>Кафедра</dt>
+        <dd><%= teacher.department %></dd>
+
+        <dt>Учёная степень</dt>
+        <dd><%= teacher.academicDegree %></dd>
+
+        <dt>Количество курсов</dt>
+        <dd><%= courses.length %></dd>
+    </dl>
+
+    <h2>Курсы преподавателя</h2>
+
+    <% if (courses.length === 0) { %>
+        <p class="muted">У этого преподавателя пока нет курсов</p>
+    <% } else { %>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Кредиты</th>
+                        <th>Семестр</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% courses.forEach((course) => { %>
+                        <tr>
+                            <td><%= course.title %></td>
+                            <td><%= course.credits %></td>
+                            <td><%= course.semester %></td>
+                            <td class="actions">
+                                <a class="btn btn-view" href="/courses/<%= course.id %>">Просмотр</a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    <% } %>
+
+    <div class="actions">
+        <a class="btn btn-secondary" href="/teachers">&larr; К списку преподавателей</a>
+        <a class="btn btn-edit" href="/teachers/<%= teacher.id %>/edit">Редактировать</a>
+        <form class="inline-form"
+              action="/teachers/<%= teacher.id %>/delete" method="POST"
+              onsubmit="return confirm('Вы действительно хотите удалить этого преподавателя?')">
+            <button type="submit" class="btn btn-delete">Удалить</button>
+        </form>
+    </div>
+</article>
+
+<%- include('../partials/footer') %>
