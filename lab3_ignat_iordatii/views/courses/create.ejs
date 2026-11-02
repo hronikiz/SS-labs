@@ -1,0 +1,38 @@
+<%- include('../partials/header') %>
+
+<h1>Добавление курса</h1>
+
+<% if (errors.length > 0) { %>
+    <div class="error-box">
+        <p>Исправьте ошибки:</p>
+        <ul>
+            <% errors.forEach((error) => { %>
+                <li><%= error %></li>
+            <% }) %>
+        </ul>
+    </div>
+<% } %>
+
+<form class="course-form" action="/courses" method="POST" novalidate>
+    <label for="title">Название дисциплины</label>
+    <input type="text" id="title" name="title" value="<%= course.title %>">
+
+    <label for="teacher">Преподаватель</label>
+    <input type="text" id="teacher" name="teacher" value="<%= course.teacher %>">
+
+    <label for="credits">Количество кредитов</label>
+    <input type="number" id="credits" name="credits" step="any" value="<%= course.credits %>">
+
+    <label for="semester">Семестр</label>
+    <input type="number" id="semester" name="semester" value="<%= course.semester %>">
+
+    <label for="description">Описание</label>
+    <textarea id="description" name="description" rows="5"><%= course.description %></textarea>
+
+    <div class="actions">
+        <button type="submit" class="btn btn-primary">Добавить курс</button>
+        <a class="btn btn-secondary" href="/courses">Отмена</a>
+    </div>
+</form>
+
+<%- include('../partials/footer') %>

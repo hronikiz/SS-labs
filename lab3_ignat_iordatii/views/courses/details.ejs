@@ -1,0 +1,31 @@
+<%- include('../partials/header') %>
+
+<article class="course-card">
+    <h1><%= course.title %></h1>
+
+    <dl class="course-info">
+        <dt>Преподаватель</dt>
+        <dd><%= course.teacher %></dd>
+
+        <dt>Количество кредитов</dt>
+        <dd><%= course.credits %></dd>
+
+        <dt>Семестр</dt>
+        <dd><%= course.semester %></dd>
+
+        <dt>Описание</dt>
+        <dd><%= course.description %></dd>
+    </dl>
+
+    <div class="actions">
+        <a class="btn btn-secondary" href="/courses">&larr; К списку курсов</a>
+        <a class="btn btn-edit" href="/courses/<%= course.id %>/edit">Редактировать</a>
+        <form class="inline-form"
+              action="/courses/<%= course.id %>/delete" method="POST"
+              onsubmit="return confirm('Удалить этот курс?')">
+            <button type="submit" class="btn btn-delete">Удалить</button>
+        </form>
+    </div>
+</article>
+
+<%- include('../partials/footer') %>
