@@ -1,0 +1,76 @@
+<%- include('partials/header') %>
+
+<h1>Статистика</h1>
+
+<div class="stat-cards">
+    <div class="stat-card">
+        <div class="stat-number"><%= totalTeachers %></div>
+        <div class="stat-label">Преподавателей</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number"><%= totalCourses %></div>
+        <div class="stat-label">Курсов</div>
+    </div>
+</div>
+
+<h2>Преподаватель с наибольшим количеством курсов</h2>
+<% if (topTeachers.length === 0) { %>
+    <p class="muted">Пока нет ни одного курса</p>
+<% } else { %>
+    <p class="top-teacher">
+        <% topTeachers.forEach((teacher, index) => { %>
+            <a href="/teachers/<%= teacher.id %>"><%= teacher.name %></a><%= index < topTeachers.length - 1 ? ', ' : '' %>
+        <% }) %>
+        (курсов: <%= maxCount %>)
+    </p>
+<% } %>
+
+<h2>Курсы по семестрам</h2>
+<div class="table-wrap">
+    <table>
+        <thead>
+            <tr>
+                <th>Семестр</th>
+                <th>Курсов</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% bySemester.forEach((item) => { %>
+                <tr>
+                    <td>Семестр <%= item.semester %></td>
+                    <td><%= item.count %></td>
+                        <td class="bar-cell">
+                            <progress value="<%= item.count %>" max="<%= maxSemesterCount %>"></progress>
+                        </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<h2>Курсы по преподавателям</h2>
+<% if (byTeacher.length === 0) { %>
+    <p class="empty">Преподаватели не найдены</p>
+<% } else { %>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Преподаватель</th>
+                    <th>Курсов</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% byTeacher.forEach((teacher) => { %>
+                    <tr>
+                        <td><a href="/teachers/<%= teacher.id %>"><%= teacher.name %></a></td>
+                        <td><%= teacher.count %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+<% } %>
+
+<%- include('partials/footer') %>

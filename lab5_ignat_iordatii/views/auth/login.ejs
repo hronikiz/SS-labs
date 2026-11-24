@@ -1,0 +1,35 @@
+<%- include('../partials/header') %>
+
+<h1>Вход</h1>
+
+<% if (registered) { %>
+    <div class="success-box">
+        <p>Регистрация прошла успешно. Теперь можно войти.</p>
+    </div>
+<% } %>
+
+<% if (errors.length > 0) { %>
+    <div class="error-box">
+        <p>Не удалось войти:</p>
+        <ul>
+            <% errors.forEach((error) => { %>
+                <li><%= error %></li>
+            <% }) %>
+        </ul>
+    </div>
+<% } %>
+
+<form class="course-form" action="/login" method="POST" novalidate>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" value="<%= form.email %>">
+
+    <label for="password">Пароль</label>
+    <input type="password" id="password" name="password">
+
+    <div class="actions">
+        <button type="submit" class="btn btn-primary">Войти</button>
+        <a class="btn btn-secondary" href="/register">Регистрация</a>
+    </div>
+</form>
+
+<%- include('../partials/footer') %>

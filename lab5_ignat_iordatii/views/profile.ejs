@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+
+<article class="course-card">
+    <h1>Профиль</h1>
+
+    <dl class="course-info">
+        <dt>Имя</dt>
+        <dd><%= user.name %></dd>
+
+        <dt>Email</dt>
+        <dd><%= user.email %></dd>
+
+        <dt>Роль</dt>
+        <dd><%= user.role %></dd>
+
+        <dt>Дата регистрации</dt>
+        <dd><%= user.createdAt.toLocaleString('ru-RU') %></dd>
+
+        <dt>Последний вход</dt>
+        <dd><%= user.lastLogin ? user.lastLogin.toLocaleString('ru-RU') : '-' %></dd>
+    </dl>
+</article>
+
+<%- include('partials/footer') %>

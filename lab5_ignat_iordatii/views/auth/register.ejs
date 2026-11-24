@@ -1,0 +1,35 @@
+<%- include('../partials/header') %>
+
+<h1>Регистрация</h1>
+
+<% if (errors.length > 0) { %>
+    <div class="error-box">
+        <p>Исправьте ошибки:</p>
+        <ul>
+            <% errors.forEach((error) => { %>
+                <li><%= error %></li>
+            <% }) %>
+        </ul>
+    </div>
+<% } %>
+
+<form class="course-form" action="/register" method="POST" novalidate>
+    <label for="name">Имя</label>
+    <input type="text" id="name" name="name" value="<%= form.name %>">
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" value="<%= form.email %>">
+
+    <label for="password">Пароль</label>
+    <input type="password" id="password" name="password">
+
+    <label for="confirmPassword">Подтверждение пароля</label>
+    <input type="password" id="confirmPassword" name="confirmPassword">
+
+    <div class="actions">
+        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+        <a class="btn btn-secondary" href="/login">Уже есть аккаунт</a>
+    </div>
+</form>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,19 @@
+</main>
+
+<!-- Блок уведомлений: сюда notifications.js добавляет сообщения WebSocket -->
+<aside class="notifications" id="notifications" aria-live="polite">
+    <h3>Уведомления</h3>
+    <p class="notifications-empty" id="notifications-empty">Новых уведомлений нет</p>
+    <div id="notifications-list"></div>
+</aside>
+
+<footer class="site-footer">
+    <div class="container">
+        <p><%= student.name %>, группа <%= student.group %> &copy; <%= new Date().getFullYear() %></p>
+    </div>
+</footer>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/notifications.js"></script>
+</body>
+</html>
